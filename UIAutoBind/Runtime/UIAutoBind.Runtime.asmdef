@@ -1,0 +1,10 @@
+{
+    "name": "UIAutoBind.Runtime",
+    "rootNamespace": "UIAutoBind",
+    "references": [
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

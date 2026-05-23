@@ -1,0 +1,12 @@
+{
+    "name": "UIAutoBind.Editor",
+    "rootNamespace": "UIAutoBind.Editor",
+    "references": [
+        "UIAutoBind.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
