@@ -13,7 +13,7 @@ namespace UIAutoBind.Editor
         public void OnPreprocessBuild(BuildReport report)
         {
             Debug.Log("[UIAutoBinder] Pre-build scan starting...");
-            string[] guids = AssetDatabase.FindAssets("t:Prefab");
+            string[] guids = AssetDatabase.FindAssets("t:Prefab", UIAutoBinderScanner.UIPrefabSearchPaths);
             int refreshed = 0;
             int warned = 0;
             int total = guids.Length;

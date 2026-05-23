@@ -221,19 +221,22 @@ namespace UIAutoBind.Editor
             }
         }
 
+        private static readonly Dictionary<string, Type> s_TypeCache = new Dictionary<string, Type>();
+
         internal static Component FindComponent(Transform t, List<string> typeNames)
         {
             foreach (string typeName in typeNames)
             {
-                Type type = Type.GetType(typeName);
-                if (type == null)
-                    type = Type.GetType(typeName + ", UnityEngine.UI");
-                if (type == null)
-                    continue;
+                if (!s_TypeCache.TryGetValue(typeName, out Type type))
+                {
+                    type = Type.GetType(typeName)
+                        ?? Type.GetType(typeName + ", UnityEngine.UI");
+                    s_TypeCache[typeName] = type; // null is fine as cache sentinel
+                }
+                if (type == null) continue;
 
                 Component comp = t.GetComponent(type);
-                if (comp != null)
-                    return comp;
+                if (comp != null) return comp;
             }
             return null;
         }

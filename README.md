@@ -73,3 +73,34 @@ m_AutoBinder = GetComponent<UIAutoBinder>();
 ## 许可
 
 MIT
+
+## 自动化框架集成示例
+
+借助 UIAutoBind，自动化/测试框架可直接按键名操控 UI，无需硬编码层级路径：
+
+```csharp
+// 获取当前顶层 Form
+var topForm = FindTopUIForm(); // 项目自行实现
+var binder = topForm.GetComponent<UIAutoBinder>();
+
+// 模拟点击按钮
+binder.GetButton("Start").onClick.Invoke();
+
+// 读取文本
+string hp = binder.GetText("HpValue").text;
+
+// 设置开关
+binder.GetToggle("Music").isOn = false;
+
+// 列出当前 Form 所有可交互按钮
+foreach (var btn in binder.GetAllOfType<Button>())
+    Debug.Log($"Button: {btn.name}, interactable={btn.interactable}");
+```
+
+对比传统方式 `GameObject.Find("Canvas/.../btn_Start")` —— 层级变动不影查找，O(1) 字典查表零 GC 分配。
+
+## 性能说明
+
+- **运行时查询**: `GetUIComponent<T>()` 纯字典查找，O(1)，零 GC 分配
+- **Editor 扫描**: Type 解析结果自动缓存，同类型名只反射一次，后续扫描零开销
+- **构建扫描**: 与 Setup 共享同一份 `UIPrefabSearchPaths` 配置，只扫 UI 文件夹不扫全项目
