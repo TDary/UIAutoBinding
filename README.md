@@ -1,6 +1,6 @@
 # UIAutoBind
 
-基于命名约定的 Unity uGUI 静态 UI 绑定方案。Editor 时自动扫描 Prefab 子节点，运行时 O(1) 字典查找替代 GameObject.Find / GetComponentsInChildren 全场景遍历。
+基于命名约定的 Unity UGUI 静态 UI 绑定方案。Editor 时自动扫描 Prefab 子节点，运行时 O(1) 字典查找替代 GameObject.Find / GetComponentsInChildren 全场景遍历。
 
 ## 接入步骤
 
